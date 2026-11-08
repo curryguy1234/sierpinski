@@ -18,10 +18,10 @@ int main(int argc, char * argv[]) {
     previousRow = numberRows[j%2];
     currentRow = numberRows[(j+1)%2];
     for (int i=0; i<EADK_SCREEN_WIDTH; i++) {
-      if (i==0) {
-        currentRow[i] = 1;
+      if (j==0) {
+          currentRow[i] = (i == 160) ? 1 : 0;
       } else {
-        currentRow[i] = previousRow[i-1] + previousRow[i];
+       currentRow[i] = (i > 0 ? previousRow[i-1] : 0) + (i < EADK_SCREEN_WIDTH-1 ? previousRow[i+1] : 0);
       }
       pixelRow[i] = (currentRow[i]%2) ? EADK::Display::Color(0xFFFF) : EADK::Display::Color(0x0);
     }
